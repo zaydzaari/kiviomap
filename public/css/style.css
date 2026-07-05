@@ -47,8 +47,9 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: .5rem;
+  min-height: 56px;
 }
 
 .nav-brand {
@@ -57,12 +58,17 @@ body {
   color: var(--text);
   text-decoration: none;
   letter-spacing: -.5px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
   gap: .5rem;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  min-width: 0;
 }
 
 .nav-links a:not(.btn-primary) {
@@ -73,6 +79,7 @@ body {
   padding: .4rem .75rem;
   border-radius: var(--radius);
   transition: color .15s;
+  white-space: nowrap;
 }
 
 .nav-links a:not(.btn-primary):hover {
@@ -81,6 +88,9 @@ body {
 
 /* ── USER BADGE ─────────────────────────────────────── */
 .user-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
   font-weight: 600;
   font-size: .875rem;
   color: var(--text);
@@ -88,13 +98,15 @@ body {
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: 4px;
+  white-space: nowrap;
 }
 
 .user-badge small {
   font-weight: 400;
   color: var(--text-muted);
   font-size: .75rem;
-  margin-left: .25rem;
+  margin-left: 0;
+  white-space: nowrap;
 }
 
 /* ── BUTTONS ────────────────────────────────────────── */
@@ -112,6 +124,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: .35rem;
+  white-space: nowrap;
 }
 
 .btn-primary:hover { background: var(--primary-dark); }
@@ -729,13 +742,27 @@ body {
 }
 
 .alert-success {
-  background: rgba(122,170,106,.1);
-  border: 1px solid rgba(122,170,106,.3);
+  background: rgba(122,170,106,.12);
+  border: 1px solid rgba(122,170,106,.65);
   border-radius: 8px;
   padding: .65rem .9rem;
   margin-bottom: 1.25rem;
   color: #a3d995;
   font-size: .875rem;
+  line-height: 1.45;
+  box-shadow: inset 3px 0 0 var(--green);
+}
+
+.alert-error {
+  background: rgba(192,90,74,.12);
+  border: 1px solid rgba(192,90,74,.72);
+  border-radius: 8px;
+  padding: .65rem .9rem;
+  margin-bottom: 1.25rem;
+  color: #f1aaa1;
+  font-size: .875rem;
+  line-height: 1.45;
+  box-shadow: inset 3px 0 0 var(--red);
 }
 
 /* ── DETAIL PAGE ────────────────────────────────────── */
@@ -1129,6 +1156,10 @@ code {
   font-size: .9rem !important;
   border-bottom: 1px solid rgba(255,255,255,.15) !important;
 }
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 800 !important;
+}
 .leaflet-bar a:last-child {
   border-bottom: none !important;
 }
@@ -1190,26 +1221,40 @@ code {
 /* ── RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 768px) {
   .navbar {
-    padding: .6rem 1rem;
-    gap: .5rem;
-    flex-wrap: wrap;
+    padding: .5rem .55rem;
+    gap: .35rem;
+    flex-wrap: nowrap;
+    min-height: 48px;
+  }
+  #map {
+    height: calc(100dvh - 48px);
+  }
+  .nav-brand {
+    font-size: .95rem;
   }
   .nav-links {
-    flex-wrap: wrap;
-    gap: .3rem;
+    flex-wrap: nowrap;
+    gap: .25rem;
     font-size: .8rem;
+    min-width: 0;
   }
   .nav-links a:not(.btn-primary) {
-    padding: .3rem .5rem;
-    font-size: .8rem;
+    padding: .28rem .38rem;
+    font-size: .76rem;
   }
   .btn-primary, a.btn-primary {
-    padding: .4rem .8rem;
-    font-size: .8rem;
+    padding: .34rem .55rem;
+    font-size: .76rem;
   }
   .user-badge {
-    font-size: .75rem;
-    padding: .25rem .5rem;
+    font-size: .72rem;
+    padding: .24rem .42rem;
+    max-width: 42vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .user-badge small {
+    font-size: .68rem;
   }
   .detail-page {
     padding: 1rem .75rem;
@@ -1407,4 +1452,3 @@ code {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
-`n.alert-error {`n  background: rgba(239,68,68,.1);`n  border: 1px solid rgba(239,68,68,.3);`n  border-radius: 8px;`n  padding: .65rem .9rem;`n  margin-bottom: 1.25rem;`n  color: #fca5a5;`n  font-size: .875rem;`n}
